@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .box{
+            width: 300px;
+            height: 300px;
+            background-color: red;
+
+        }
+        .active{
+            background-color: green;
+        }
+        
+        .border{
+            border: solid pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">{{msg}}</div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        //创建实例化对象
+        //v-text innerText
+        //v-html innerHTML
+        //v-if 数据属性对应的值如果为假 则不在页面中显示 反之亦然
+        //v-show 控制着dom元素的显示隐藏 display:none|block;
+        //v-bind 绑定标签上的属性（内置的属性和自定义的属性）
+        //v-on 简写形式 @
+        //v-for="(item,index)in menuLists" 优先级最大
+        var vm=new Vue({
+            el:"#app",
+            data:function(){
+                return{
+                    msg:'指令系统',
+                    msg2:'<h2>指令系统</h2>',
+                    isShow:true,
+                    isActive:false,
+                    text:'aaaa',
+                    t1:'ljn',
+                    t2:'kk',  
+                    items:[
+                        {message:'Ljn'},
+                        {message:'Kunkun'}
+                    ]  
+
+                }
+            },
+            template:`<div id="app">
+                <p>{{msg}}</p>
+                <h2>{{msg}}</h2>
+                <div v-html="msg2"></div>
+                <div v-text=1+1></div>
+                <div v-if=isShow>开启</div>
+                <div v-if=!isShow>关闭</div>
+                <div v-if="Math.random()<0.5">已显示</div>
+                <div v-else>已关闭</div>
+                <div v-show='isShow'>显示</div>
+                <div v-show='!isShow'>隐藏</div>
+                <div class='box' v-on:click='clickHandler' v-bind:class="{active:isActive}"></div>
+                <ul>
+                    <li v-for='item in items' :key='items.message'>
+                        {{item.message}}    
+                    </li>
+                    
+                </ul>
+                </div>
+                `,
+                methods:{
+                    clickHandler(e){
+                        //console.log(this);
+                        console.log(this.isActive);
+                        this.isActive=!this.isActive;
+                        //console.log(this.isActive);
+                        
+                    }
+
+                }
+                
+
+        });
+        console.log(vm);
+    </script>
+    
+</body>
+</html>

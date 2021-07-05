@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        //组件内的data一定是个函数（为啥？
+        //创建全局组件
+        //第一个参数是组件的名字，第二个参数是选项options
+        Vue.component(`Vstn`,{
+            template:`
+           
+                <button>
+                <slot>登录</slot>
+                </button>
+            
+            `
+        });
+       
+        var Vcontent={
+            data(){
+                return{}
+            },
+            template:`
+                <div>
+                    我是内容组件
+                    <Vstn />
+                    <Vstn />
+                </div>
+            `
+        };
+        //1.声明子组件
+        var App={
+            //里面放的东西除了el跟Vue对象是一样的
+            template:`
+                <div>
+                        <Vcontent />
+                    </div>
+                </div>
+            `,
+            components:{
+  
+                Vcontent
+            }
+        };
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+
+                }
+            },
+            components:{
+                //2、挂载子组件
+                App
+            },
+            //3、用子
+            template:`<App />`//叫app的入口组件
+
+        });
+    </script>
+</body>
+</html>

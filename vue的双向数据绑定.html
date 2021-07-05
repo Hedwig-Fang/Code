@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+        <!-- v-model 双向数据绑定的体现 只能应用在有value属性-->
+    <div id="app">
+        <input v-model=msg>
+        <p>{{msg}}</p>
+        <span>Multiline message is:</span>
+        <p style="white-space: pre-line;">{{els}}</p>
+        <br>
+        <textarea v-model=msg></textarea>
+        <input v-bind:value=msg v-on:input="valueChange">
+        <p>最新项目:{{msg}}</p>
+    </div>
+
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:function(){
+            let els;
+            return{
+                msg:"ljn",
+                els:document.querySelectorAll('div'),
+            }
+
+        },
+
+        methods:{
+            valueChange(e){
+                console.log(e.target.value);
+                this.msg=e.target.value;
+                console.log(this.els)
+            }
+
+        }
+
+    })
+    </script>
+</body>
+</html>
