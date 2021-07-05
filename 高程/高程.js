@@ -91,3 +91,5 @@
 //     };
 // }
 // let person1=new Person("ljs",27)
+
+console.log("test")
